@@ -29,7 +29,7 @@ Use Yarn 1.22 atau lebih
 Clone the project
 
 ```bash
-  git clone https://gitlab.com/Agustrihanton/demfarm
+  git clone https://github.com/agusTrih/personal-website
 ```
 
 Go to the project directory
