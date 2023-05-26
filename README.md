@@ -14,10 +14,6 @@ I am a proactive learner and am always seeking out ways to improve my skills and
 
 
 ## Quick Start
-
-Use Node 14 atau lebih
-Use Yarn 1.22 atau lebih
-
 ```javascript 
 "engines": {
     "node": ">=14.0.0",
