@@ -5,12 +5,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#F47B22',
-        primaryVariants: '#EB5757',
-        secondary: '#1A68AB',
+        primary: '#19A7CE',
+        primaryVariants: '#4942E4',
+        secondary: '#8696FE',
       },
 
       fontFamily: {
+        sans: ['Open Sans', 'sans-serif'],
         roboto: ['Roboto', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
       },
