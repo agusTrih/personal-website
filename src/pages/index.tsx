@@ -4,15 +4,9 @@ import { Paragraph } from '@/components/atoms/Paragraph';
 import { Jumbotron } from '@/components/organisms/Jumbotron';
 import type { NextPage } from 'next';
 import { RoughNotation, RoughNotationGroup } from 'react-rough-notation';
+import { pallete } from 'src/constant';
 
 const Home: NextPage = () => {
-  const pallete = {
-    primary: '#a2d2ff',
-    primaryVariants: '#bde0fe',
-    secondary: '#ffafcc',
-    secondaryVariants: '#ffc8dd',
-    netral: '#cdb4db',
-  };
   return (
     <div className="max-w-4xl mx-auto px-4">
       <Heading as="h1" sizes="xxl" className="mb-10">
