@@ -12,13 +12,17 @@ const Jumbotron = () => {
           {/* content */}
           <section className="col-span-8 pt-16">
             <div>
-              <div>
-                <img
-                  src={personal?.author?.avatar_url}
-                  alt="avatar"
-                  className="rounded-full w-9 h-9"
-                />
-                <Paragraph text="Hello! I'm Agus Trihanton."></Paragraph>
+              <div className="flex">
+                <div className="mr-2">
+                  <img
+                    src={personal?.author?.avatar_url}
+                    alt="avatar"
+                    className="rounded-full w-9 h-9"
+                  />
+                </div>
+                <Paragraph variant="bubble">
+                  Hello! Im Agus Trihanton.
+                </Paragraph>
               </div>
             </div>
             <Heading sizes="xxl" colors="white" as="h1">

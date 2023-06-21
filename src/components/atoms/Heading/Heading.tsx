@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react';
 import cn from '~/utils/classNames';
 import type { VariantProps } from 'class-variance-authority';
 
-const headingVariants = cva('font-extrabold font-sans', {
+const headingVariants = cva('font-bold font-sans', {
   variants: {
     sizes: {
       xs: 'text-xs',
@@ -11,7 +11,7 @@ const headingVariants = cva('font-extrabold font-sans', {
       md: 'text-md leading-[28px]',
       lg: 'text-lg',
       xl: 'text-xl',
-      xxl: 'text-6xl',
+      xxl: 'md:text-3xl text-xl',
     },
     as: {
       h1: '',

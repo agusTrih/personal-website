@@ -4,11 +4,16 @@ import cn from '~/utils/classNames';
 import type { VariantProps } from 'class-variance-authority';
 import { decodeHtmlEntities } from '~/utils/decode';
 
-const paragraphVariants = cva('font-sans text-text-body font-normal', {
+const paragraphVariants = cva('font-sans text-text-body font-normal mb-3', {
   variants: {
+    variant: {
+      default: '',
+      bubble:
+        'bg-blue-500 py-1 px-2 text-white text-sm inline-block rounded-3xl font-bold relative leading-tight',
+    },
     size: {
       sm: 'text-xs leading-6',
-      md: 'text-xs leading-[18.75px] ',
+      md: 'text-sm leading-6 ',
       lg: 'text-base leading-8',
     },
   },
@@ -17,13 +22,22 @@ const paragraphVariants = cva('font-sans text-text-body font-normal', {
 interface ParagraphProps
   extends React.HTMLAttributes<HTMLParagraphElement>,
     VariantProps<typeof paragraphVariants> {
-  text?: string;
+  children?: React.ReactNode;
   isDangerous?: boolean;
+  text?: string;
 }
 
 const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
   (
-    { size = 'sm', text = '', isDangerous = false, className, ...props },
+    {
+      size = 'md',
+      variant = 'default',
+      children,
+      text = '',
+      isDangerous = false,
+      className,
+      ...props
+    },
     ref
   ) => {
     // if html input
@@ -33,6 +47,7 @@ const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
           className={cn(
             paragraphVariants({
               size,
+              variant,
               className,
             })
           )}
@@ -46,12 +61,13 @@ const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
         className={cn(
           paragraphVariants({
             size,
+            variant,
             className,
           })
         )}
         {...props}
       >
-        {decodeHtmlEntities(text)}
+        {children}
       </p>
     );
   }
