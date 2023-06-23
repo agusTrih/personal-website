@@ -1,7 +1,7 @@
 import Heading from '@/components/atoms/Heading/Heading';
 import { Highlight } from '@/components/atoms/Highlight';
 import { Paragraph } from '@/components/atoms/Paragraph';
-import { Jumbotron } from '@/components/organisms/Jumbotron';
+
 import type { NextPage } from 'next';
 import { RoughNotation, RoughNotationGroup } from 'react-rough-notation';
 import { pallete } from 'src/constant';
@@ -19,42 +19,49 @@ const Home: NextPage = () => {
       </Heading>
       <Paragraph>
         My skill set encompasses a strong foundation in{' '}
-        <Highlight color={pallete.secondary} type="underline">
-          HTML, CSS, and JavaScript
-        </Highlight>
-        , as well as proficiency in popular library and frameworks like{' '}
+        <Highlight color={pallete.netral}>HTML, CSS, and JavaScript</Highlight>,
+        as well as proficiency in popular library and frameworks like{' '}
         <Highlight color={pallete.secondary} type="circle">
-          <strong>React Js</strong>
+          React Js
         </Highlight>{' '}
         and{' '}
         <Highlight color={pallete.secondary} type="circle">
-          <strong>Next js</strong>
+          Next js
         </Highlight>{' '}
         . I am well-versed in utilizing{' '}
         <Highlight color={pallete.secondary} type="circle">
           Git
         </Highlight>{' '}
         for version control and have a solid understanding of{' '}
-        <Highlight color={pallete.secondary} type="underline">
-          responsive design
-        </Highlight>{' '}
+        <Highlight color={pallete.primaryVariants}>responsive design</Highlight>{' '}
         principles.
       </Paragraph>
 
       <Paragraph>
-        Driven by my proactive nature, I constantly seek opportunities to
-        enhance my skills and stay abreast of the latest technologies.
+        Driven by my{' '}
+        <Highlight color={pallete.secondaryVariants}>
+          proactive nature
+        </Highlight>
+        , I constantly seek opportunities to enhance my skills and stay abreast
+        of the latest technologies.
       </Paragraph>
       <Paragraph>
         Throughout my professional journey, I have consistently delivered
-        high-quality work within deadlines, maintaining a track record of
-        successful collaboration with cross-functional teams.
+        <Highlight color={pallete.netral}> high-quality work</Highlight> within
+        deadlines, maintaining a track record of{' '}
+        <Highlight color={pallete.secondaryVariants}>
+          successful collaboration
+        </Highlight>
+        with cross-functional teams.
       </Paragraph>
       <Paragraph>
-        By combining my technical expertise, passion for creating exceptional
-        user experiences, and commitment to continuous improvement, I am
-        confident in my ability to make a valuable contribution as a frontend
-        engineer.
+        By combining my{' '}
+        <Highlight color={pallete.primaryVariants}>
+          technical expertise
+        </Highlight>
+        , passion for creating exceptional user experiences, and commitment to
+        continuous improvement, I am confident in my ability to make a valuable
+        contribution as a frontend engineer.
       </Paragraph>
       <Paragraph>
         {' '}

@@ -14,7 +14,7 @@ import { RoughNotation } from 'react-rough-notation';
 
 interface HighlightProps {
   color?: string;
-  children: ReactNode;
+  children: string;
   type?:
     | 'underline'
     | 'box'
@@ -32,7 +32,7 @@ export function Highlight({
   strokeWidth = 2,
   type = 'highlight',
 }: HighlightProps) {
-  const animationDuration = Math.floor(30 * type.length);
+  const animationDuration = Math.floor(30 * children.length);
   return (
     <RoughNotation
       type={type}
