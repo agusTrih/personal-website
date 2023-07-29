@@ -1,6 +1,7 @@
 import Heading from '@/components/atoms/Heading/Heading';
 import { Highlight } from '@/components/atoms/Highlight';
 import { Paragraph } from '@/components/atoms/Paragraph';
+import Stat from '@/components/organisms/Stat';
 
 import type { NextPage } from 'next';
 import { RoughNotation, RoughNotationGroup } from 'react-rough-notation';
@@ -11,6 +12,7 @@ const Home: NextPage = () => {
   const isFontReady = useIsFontReady();
   return (
     <div className="max-w-4xl mx-auto px-4">
+      <Stat />
       <RoughNotationGroup show={isFontReady}>
         <Heading as="h1" sizes="xxl" className="mb-10">
           Hi, my name is Agus Trihanton and I am a{' '}

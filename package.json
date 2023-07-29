@@ -16,17 +16,26 @@
     "npm": "please-use-yarn"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.32.0",
+    "@tanstack/react-query-devtools": "^4.32.0",
+    "chart.js": "^4.3.2",
+    "chartjs-plugin-rough": "^0.2.0",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.7",
     "he": "^1.2.0",
+    "lucide-react": "^0.263.1",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-aria": "^3.25.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.2",
     "react-icons": "^4.8.0",
     "react-rough-notation": "^1.0.5",
-    "tailwind-merge": "^1.12.0"
+    "swr": "^2.2.0",
+    "tailwind-merge": "^1.12.0",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.5.1",
