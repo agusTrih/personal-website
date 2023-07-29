@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { RepoData } from 'src/types/type';
 import { FaSpinner } from 'react-icons/fa';
+import { ACCESSTOKEN } from 'src/config/environment';
 
 const RepositoryCard = ({
   selectedRepo,
@@ -67,7 +68,7 @@ const GitHubRepositoryInfo = () => {
       }
     }
   }, []);
-  const accessToken = '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';
+  const accessToken = ACCESSTOKEN;
 
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
