@@ -27,7 +27,7 @@ const Collections: FC<CollectionsProps> = () => {
       {Array.from(collections).map(
         ([key, repo]: [string, RepoData], index: number) => (
           <li
-            className="shadow-sm p-4 border border-slate-300 mb-2"
+            className="shadow-sm p-4 border border-slate-300 mb-4"
             key={index}
           >
             {/* s1 */}
@@ -50,7 +50,8 @@ const Collections: FC<CollectionsProps> = () => {
               <div className="flex items-center">
                 <div
                   className={`w-4 h-4  rounded-full mr-1 ${
-                    languageColors[repo?.language?.toLowerCase()]
+                    languageColors[repo?.language?.toLowerCase()] ||
+                    'bg-gray-500'
                   }`}
                 />
                 <div>{repo?.language}</div>
@@ -64,7 +65,7 @@ const Collections: FC<CollectionsProps> = () => {
                 <div>{repo?.forks_count}</div>
               </div>
             </div>
-            <div className="flex items-center justify-center text-lg text-gray-600 border-t border-gray-300 mt-2">
+            <div className="flex items-center justify-center text-lg text-gray-600 border-t border-gray-300 mt-4 pt-3">
               <Scale className="mr-1" />{' '}
               <div>{repo?.license?.name || 'N/A'}</div>
             </div>
