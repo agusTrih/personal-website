@@ -12,7 +12,8 @@ import cn from '~/utils/classNames';
 import { languageColors } from 'src/constant';
 import Link from 'next/link';
 import { buttonVariants } from '../atoms/Button/Button';
-
+import { fetchGitHubRateLimit } from 'src/config/fetchgGithubLimit';
+import { useQuery } from '@tanstack/react-query';
 const RepositoryCard = ({
   selectedRepo,
   addToCollection,
@@ -85,6 +86,9 @@ const GitHubRepositoryInfo = () => {
   const [collection, setCollection] = useState<Map<number, RepoData>>(() => {
     return new Map();
   });
+  const { data, error } = useQuery(['rateLimit'], fetchGitHubRateLimit);
+  console.log(data);
+
   useEffect(() => {
     const collectionFromLocal = loadMapFromLocalStorage(
       'repositoryCollections'
@@ -110,7 +114,7 @@ const GitHubRepositoryInfo = () => {
         `https://api.github.com/search/repositories?q=${searchTerm}`,
         {
           headers: {
-            Authorization: `token ${accessToken}`,
+            Authorization: accessToken || '',
           },
         }
       );
@@ -146,7 +150,7 @@ const GitHubRepositoryInfo = () => {
       try {
         const response = await fetch(repo.url, {
           headers: {
-            Authorization: `token ${accessToken}`,
+            Authorization: accessToken || '',
           },
         });
 
