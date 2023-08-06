@@ -2,7 +2,7 @@ import { cva } from 'class-variance-authority';
 import React, { forwardRef } from 'react';
 import cn from '~/utils/classNames';
 import type { VariantProps } from 'class-variance-authority';
-const buttonVariants = cva('py-3 px-5', {
+export const buttonVariants = cva('py-3 px-5', {
   variants: {
     variant: {
       default: 'border border-gray-500',

@@ -9,19 +9,20 @@ export function MainNav({
   const nav = [
     {
       title: 'Blog',
-      link: '/blog',
+      link: 'https://medium.com/@agustrihanton',
+      isExternal: true,
+      isTarget: true,
     },
     {
-      title: 'Project',
-      link: '/project',
-    },
-    {
-      title: 'Technology',
-      link: '/tech',
+      title: 'Collections',
+      link: '/collections',
+      isExternal: false,
     },
     {
       title: 'Kontak',
-      link: '/kontak',
+      link: 'mailto:agustrihanton97@gmail.com?subject=CodeWithAgus',
+      isTarget: false,
+      isExternal: true,
     },
   ];
   return (
@@ -30,6 +31,19 @@ export function MainNav({
       {...props}
     >
       {nav?.map((item) => {
+        if (item.isExternal)
+          return (
+            <a
+              key={item.link}
+              className="text-sm font-medium transition-colors hover:text-primary"
+              href={item.link}
+              target={item?.isTarget ? '_blank' : ''}
+              rel="noopener noreferrer"
+            >
+              {' '}
+              <HighlightOnHover>{item.title}</HighlightOnHover>
+            </a>
+          );
         return (
           <Link
             key={item.link}

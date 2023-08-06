@@ -1,7 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { RepoData } from 'src/types/type';
 import { FaSpinner } from 'react-icons/fa';
-import { ACCESSTOKEN } from 'src/config/environment';
+import { TOKEN } from 'src/config/environment';
+import { toast } from 'react-hot-toast';
+import {
+  loadMapFromLocalStorage,
+  saveMapToLocalStorage,
+} from '~/utils/localstorage';
+import { GitFork, Star, BookKey, Scale } from 'lucide-react';
+import cn from '~/utils/classNames';
+import { languageColors } from 'src/constant';
+import Link from 'next/link';
+import { buttonVariants } from '../atoms/Button/Button';
 
 const RepositoryCard = ({
   selectedRepo,
@@ -12,39 +22,56 @@ const RepositoryCard = ({
 }) => {
   return (
     <div className="mt-4">
-      {/* Logo repository */}
-      <img
-        className="w-16 h-16 rounded-full mx-auto"
-        src={selectedRepo?.owner?.avatar_url}
-        alt="Repo Logo"
-      />
+      {/* <p className="text-lg text-gray-600">
+        License: {selectedRepo?.license?.name || 'N/A'}
+      </p>
 
-      {/* Informasi repository */}
-      <div className="text-center">
-        <h1 className="text-3xl font-bold mb-2">{selectedRepo?.full_name}</h1>
-        <p className="text-xl font-bold mb-4">{selectedRepo?.description}</p>
-        <div className="flex justify-between">
-          <p className="text-lg text-gray-600">
-            📝 Open Issues: {selectedRepo?.open_issues_count}
-          </p>
-          <p className="text-lg text-gray-600">
-            ⭐ Total Stars: {selectedRepo?.stargazers_count}
-          </p>
-          <p className="text-lg text-gray-600">
-            💻 Total Forks: {selectedRepo?.forks_count}
-          </p>
+    */}
+      <div className="shadow-sm p-4 border border-slate-300">
+        {/* s1 */}
+        <div className="flex items-center">
+          <img
+            src={selectedRepo?.owner?.avatar_url}
+            className="w-6 h-6 rounded-full mt-2 mr-1"
+          />
+
+          <h6 className="font-bold text-primary text-3xl">
+            {selectedRepo?.full_name}
+          </h6>
         </div>
-        <p className="text-lg text-gray-600">
-          License: {selectedRepo?.license?.name || 'N/A'}
-        </p>
-
-        {/* Add to Collection button */}
-        <button
-          onClick={addToCollection}
-          className="px-4 py-2 mt-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none"
-        >
-          Add to Collection
-        </button>
+        {/* s2 */}
+        <div className="my-3">
+          <p>{selectedRepo?.description}</p>{' '}
+        </div>
+        {/* s3 */}
+        <div className="flex justify-between">
+          <div className="flex items-center">
+            <div
+              className={`w-4 h-4  rounded-full mr-1 ${
+                languageColors[selectedRepo?.language?.toLowerCase()]
+              }`}
+            />
+            <div>{selectedRepo?.language}</div>
+          </div>
+          <div className="flex text-yellow-500">
+            <Star className="mr-1" />
+            <div>{selectedRepo?.stargazers_count}</div>
+          </div>
+          <div className="flex">
+            <GitFork className="mr-1" />
+            <div>{selectedRepo?.forks_count}</div>
+          </div>
+        </div>
+        <div className="flex items-center justify-center text-lg text-gray-600 border-t border-gray-300 mt-2">
+          {/* <Scale className="mr-1" />{' '}
+          <div>{selectedRepo?.license?.name || 'N/A'}</div> */}
+          <button
+            onClick={addToCollection}
+            className="px-4 py-2 mt-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none"
+          >
+            Add to Collection
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -59,16 +86,13 @@ const GitHubRepositoryInfo = () => {
     return new Map();
   });
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // Check if we are in the browser environment
-      const collectionData = localStorage.getItem('repositoryCollection');
-      if (collectionData) {
-        const parsedData = JSON.parse(collectionData);
-        setCollection(new Map(parsedData));
-      }
-    }
+    const collectionFromLocal = loadMapFromLocalStorage(
+      'repositoryCollections'
+    );
+
+    setCollection(collectionFromLocal);
   }, []);
-  const accessToken = ACCESSTOKEN;
+  const accessToken = TOKEN;
 
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -150,11 +174,12 @@ const GitHubRepositoryInfo = () => {
       if (typeof window !== 'undefined') {
         // Check if localStorage is available in the browser environment
         try {
-          localStorage.setItem(
-            'repositoryCollection',
-            JSON.stringify(Array.from(newCollection.entries()))
+          saveMapToLocalStorage('repositoryCollections', newCollection);
+          toast.success(
+            `Successfully Add ${selectedRepo?.full_name} to  collections`
           );
         } catch (error) {
+          toast.error(`failed Add ${selectedRepo?.full_name}  to  collections`);
           console.error('Error saving to localStorage:', error);
         }
       }
@@ -163,8 +188,8 @@ const GitHubRepositoryInfo = () => {
   }, [selectedRepo, collection]);
 
   return (
-    <div className="space-y-4">
-      <div className="w-full md:w-96 mx-auto mt-8 p-4 bg-white shadow-lg rounded-lg">
+    <div className="space-y-4 px-4">
+      <div className="w-full sm:max-w-xl mx-auto mt-8 p-4 bg-white shadow-lg rounded-lg">
         <form onSubmit={handleFormSubmit} className="flex gap-2 mb-4">
           <input
             type="text"
@@ -213,7 +238,7 @@ const GitHubRepositoryInfo = () => {
       </div>
 
       {selectedRepo && (
-        <div className="w-72 mx-auto bg-white shadow-lg rounded-lg p-4">
+        <div className="max-w-lg sm:max-w-xl mx-auto bg-white shadow-lg rounded-lg p-4">
           <RepositoryCard
             selectedRepo={selectedRepo}
             addToCollection={addToCollection}
@@ -221,7 +246,21 @@ const GitHubRepositoryInfo = () => {
         </div>
       )}
 
-      {collection.size > 0 && (
+      <div className="p-4 flex justify-center items-center flex-col ">
+        <h6 className="mb-4">You Have {collection?.size} collections Repo</h6>
+        <div>
+          <Link
+            href="/collections"
+            className={cn(
+              'text-white',
+              buttonVariants({ variant: 'primary', size: 'sm' })
+            )}
+          >
+            Go To collections
+          </Link>
+        </div>
+      </div>
+      {/* {collection.size > 0 && (
         <div className="w-72 mx-auto bg-white shadow-lg rounded-lg p-4">
           <h2 className="text-2xl font-bold mb-2">Your Collection</h2>
           <ul className="space-y-2">
@@ -230,7 +269,7 @@ const GitHubRepositoryInfo = () => {
             ))}
           </ul>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

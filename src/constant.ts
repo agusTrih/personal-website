@@ -5,4 +5,12 @@ const pallete = {
   secondaryVariants: '#ffc8dd',
   netral: '#cdb4db',
 };
-export { pallete }
+const languageColors: { [key: string]: string } = {
+  javascript: 'bg-yellow-300',
+  typescript: 'bg-blue-600',
+  python: 'bg-blue-300',
+  java: 'bg-red-500',
+  c: 'bg-blue-900',
+
+};
+export { pallete, languageColors }

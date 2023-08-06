@@ -12,7 +12,6 @@ const Home: NextPage = () => {
   const isFontReady = useIsFontReady();
   return (
     <div className="max-w-4xl mx-auto px-4">
-      <Stat />
       <RoughNotationGroup show={isFontReady}>
         <Heading as="h1" sizes="xxl" className="mb-10">
           Hi, my name is Agus Trihanton and I am a{' '}
