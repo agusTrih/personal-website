@@ -8,7 +8,7 @@ interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
   return (
-    <header className="max-w-4xl mx-auto px-4">
+    <header className=" px-4">
       <div className="flex justify-between py-5 mb-5 border-b border-gray-300">
         <Link href={'/'}>
           <Highlight type="underline" color={pallete.primary}>
